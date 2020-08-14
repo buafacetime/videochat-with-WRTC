@@ -49,7 +49,7 @@ module.exports = {
             ]
         }),
         new HTMLWebpackPlugin({
-            title: "Bua facetime",
+            title: "Bua FaceTime",
             meta: {
                 author: "K.T Motshoana",
                 applicationName: "Bua Facetime",

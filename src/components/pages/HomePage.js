@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 
 /**
  * @returns
@@ -11,27 +11,37 @@ const HomePage = () => {
 
     return (
 
-        <form onSubmit={e => {
-            e.preventDefault();
-            console.log("submitting form")
-            console.log(input)
-        }}>
-            <input type="text"
-                placeholder="Enter room id or press create to generate one"
-                value={input}
-                onChange={e => setInput(e.target.value)} />
+        <Fragment>
+            <section id="installbanner">
+                <button id="installBtn">Install</button>
+               
+                <h4>Takes 3 seconds, No AppStore Needed!</h4>
+            </section>
+            <form onSubmit={e => {
+                e.preventDefault();
+                alert("submitting form")
+                alert(input)
 
-          <br/>
-          <section id="buttons">
-          <input type="button" value={"create"}
-                onClick={e => {
-                    console.log("create uuid button clicked")
-                }} />
+            }}>
+                <input type="text"
+                    placeholder=" Enter room id or press create to generate one"
+                    value={input}
+                    onChange={e => setInput(e.target.value)} />
 
-            <input type="submit" value="enter" />
-          </section>
-        </form>
+                <br />
+                <section id="buttons">
+                    <input type="button" value={"create"}
+                        onClick={e => {
+                            alert("create uuid button clicked");
+                            e.target.blur()
+                        }} />
 
+                    <input type="submit" value="enter"
+                        onClick={e => e.target.blur()} />
+                </section>
+            </form>
+
+        </Fragment>
     )
 }
 
