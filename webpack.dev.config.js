@@ -18,7 +18,13 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                use: ['svg-inline-loader']
+                use: [
+                    {
+                        loader: 'svg-url-loader',
+                        options: {
+                            limit: 10000,
+                        }
+                    }]
             },
             {
                 test: /\.css$/,
@@ -30,7 +36,7 @@ module.exports = {
                 use: [
                     {
                         loader: 'babel-loader',
-                        options:{
+                        options: {
                             presets: [
                                 "@babel/preset-env",
                                 "@babel/preset-react"

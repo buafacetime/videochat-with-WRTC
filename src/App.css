@@ -6,10 +6,13 @@
 }
 :root {
 	--ems: 1em;
+	--num: 2;
+	--margin: 10px;
+	--dark: #222;
 }
 
 body {
-	background-color: #1d222e;
+	background-color: var(--dark);
 }
 form {
 	margin: 30vh auto;
@@ -55,9 +58,9 @@ input[type='submit'] {
 	top: 10px;
 	left: 5px;
 	position: absolute;
-	background-color: #222;
-	padding:10px;
-	border:1px solid orange;
+	background-color:var(--dark);
+	padding: 10px;
+	border: 1px solid orange;
 	border-radius: 2px;
 }
 /* PWA Install Button */
@@ -70,5 +73,92 @@ input[type='submit'] {
 	cursor: pointer;
 	font-size: var(--ems);
 	margin-bottom: 10px;
-	border:1px solid white;
+	border: 1px solid white;
+}
+
+/* Video streams */
+video {
+	background-color: var(--dark);
+}
+#localstream {
+	z-index: 3;
+	position: absolute;
+	border: 1px solid white;
+	right: 5px;
+	bottom: 5px;
+	width: 150px;
+	height: 150px;
+}
+#remotestream {
+	height: 100vh;
+	width: 100%;
+}
+
+/* Video controls */
+#controls {
+	z-index: var(--num);
+	position: absolute;
+	bottom: 4px;
+	width: 100%;
+	height: 50%;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(6, 1fr);
+}
+/* disables click events on all svgs */
+svg{
+	pointer-events: none;
+}
+svg:hover{
+	stroke: white;
+}
+#controls * {
+	height: 50px;
+	width: 100px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+#controls button:hover {
+	/* display: block; */
+	color:yellow;
+}
+
+#switchcamera {
+	grid-column: 1/1;
+	grid-row: 2/2;
+	margin-left: var(--margin);
+}
+#screen {
+	grid-column: 1/1;
+	grid-row: 3/3;
+	margin-left: var(--margin);
+}
+#audio {
+	grid-column: 1/1;
+	grid-row: 4/4;
+	margin-left: var(--margin);
+}
+#endcall {
+	grid-column: 6/6;
+	grid-row: 6/6;
+}
+
+/* Scrollbar styles */
+
+body {
+	scrollbar-width: thin;
+	scrollbar-color: var(--dark) transparent;
+	background-color: var(--dark);
+}
+body::-webkit-scrollbar {
+	width: 12px;
+}
+body::-webkit-scrollbar-track {
+	background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+	background-color: var(--dark);
+	border-radius: 2px;
+	border: 3px solid transparent;
 }

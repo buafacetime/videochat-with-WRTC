@@ -13,7 +13,10 @@ const HomePage = () => {
 
         <Fragment>
             <section id="installbanner">
-                <button id="installBtn">Install</button>
+                <button id="installBtn" onClick={e => {
+                    alert("PWA installed")
+                    e.target.blur();
+                }}>Install</button>
                
                 <h4>Takes 3 seconds, No AppStore Needed!</h4>
             </section>
