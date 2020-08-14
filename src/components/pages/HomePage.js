@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
 
+/**
+ * @returns
+ * form endsuer must enter room id or create one,
+ * then submit form before begin allocated with a 
+ * facetime room.
+ */
 const HomePage = () => {
     const [input, setInput] = useState('');
 
