@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import camera from "../../svg/switch_cameras.svg"
 import screenOff from "../../svg/screen_off.svg"
 import screenOn from "../../svg/screen_on.svg"
@@ -8,7 +8,9 @@ import endCall from "../../svg/call_ended.svg"
 import callEnded from "../../svg/end_call.svg"
 
 const VideoChatRoom = () => {
-    
+    const localVideoRef = useRef(null),
+        remoteVideoRef = useRef(null);
+
     const [state, setState] = useState({
         switchcamera: {
             ref: useRef(null), boolean: true, off: camera, on: camera, task(bool) {
@@ -26,12 +28,22 @@ const VideoChatRoom = () => {
             ref: useRef(null), boolean: true, off: screenOff, on: screenOn, task(bool) {
                 switch (bool) {
                     case true:
+                        localVideoRef.current.srcObject = null;
                         console.log("screen turned off")
+
                         break
                     case false:
+                        this.userMedia();
                         console.log("screen turned on")
+
                         break
                 }
+            }, userMedia() {
+                navigator.mediaDevices.getUserMedia({ audio: true, video: { height: 150, width: 150 } })
+                    .then(stream => {
+                        localVideoRef.current.muted = true;
+                        localVideoRef.current.srcObject = stream;
+                    }).catch(err => console.error(err))
             }
         },
         audio: {
@@ -90,20 +102,15 @@ const VideoChatRoom = () => {
                 InvokeProcedure(state[name]);
             }
         }
-        const localVideoRef = useRef(null),
-        remoteVideoRef = useRef(null);
 
-        useEffect(() => {
-            navigator.mediaDevices.getUserMedia({audio: true, video:{height: 150, width:150}})
-            .then(stream => {
-                localVideoRef.current.muted =true;
-                  localVideoRef.current.srcObject = stream;
-            }).catch(err => console.error(err))
-        },[])
+
+    useEffect(() => {
+        screen.userMedia()
+    }, [])
 
     return (
         <div>
-            <video id="localstream"  ref={localVideoRef} autoPlay={true}></video>
+            <video id="localstream" ref={localVideoRef} autoPlay={true}></video>
             <video id="remotestream" ref={remoteVideoRef} autoPlay={true}></video>
             <section id="controls">
                 <img src={switchcamera['on']} name="switchcamera" alt="switchcamera" id="switchcamera"
