@@ -96,13 +96,14 @@ const VideoChatRoom = () => {
         useEffect(() => {
             navigator.mediaDevices.getUserMedia({audio: true, video:{height: 150, width:150}})
             .then(stream => {
+                localVideoRef.current.muted =true;
                   localVideoRef.current.srcObject = stream;
             }).catch(err => console.error(err))
         },[])
 
     return (
         <div>
-            <video id="localstream" mute="true" ref={localVideoRef} autoPlay={true}></video>
+            <video id="localstream"  ref={localVideoRef} autoPlay={true}></video>
             <video id="remotestream" ref={remoteVideoRef} autoPlay={true}></video>
             <section id="controls">
                 <img src={switchcamera['on']} name="switchcamera" alt="switchcamera" id="switchcamera"
