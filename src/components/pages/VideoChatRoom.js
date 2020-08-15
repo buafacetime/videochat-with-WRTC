@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import camera from "../../svg/switch_cameras.svg"
 import screenOff from "../../svg/screen_off.svg"
 import screenOn from "../../svg/screen_on.svg"
@@ -8,6 +8,7 @@ import endCall from "../../svg/call_ended.svg"
 import callEnded from "../../svg/end_call.svg"
 
 const VideoChatRoom = () => {
+    
     const [state, setState] = useState({
         switchcamera: {
             ref: useRef(null), boolean: true, off: camera, on: camera, task(bool) {
@@ -89,11 +90,20 @@ const VideoChatRoom = () => {
                 InvokeProcedure(state[name]);
             }
         }
+        const localVideoRef = useRef(null),
+        remoteVideoRef = useRef(null);
+
+        useEffect(() => {
+            navigator.mediaDevices.getUserMedia({audio: true, video:{height: 150, width:150}})
+            .then(stream => {
+                  localVideoRef.current.srcObject = stream;
+            }).catch(err => console.error(err))
+        },[])
 
     return (
         <div>
-            <video id="localstream" mute="true"></video>
-            <video id="remotestream"></video>
+            <video id="localstream" mute="true" ref={localVideoRef} autoPlay={true}></video>
+            <video id="remotestream" ref={remoteVideoRef} autoPlay={true}></video>
             <section id="controls">
                 <img src={switchcamera['on']} name="switchcamera" alt="switchcamera" id="switchcamera"
                     ref={switchcamera['ref']} onClick={Click} />
