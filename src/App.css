@@ -58,7 +58,7 @@ input[type='submit'] {
 	top: 10px;
 	left: 5px;
 	position: absolute;
-	background-color:var(--dark);
+	background-color: var(--dark);
 	padding: 10px;
 	border: 1px solid orange;
 	border-radius: 2px;
@@ -106,32 +106,28 @@ video {
 	grid-template-rows: repeat(6, 1fr);
 }
 /* disables click events on all svgs */
-svg{
+svg {
 	pointer-events: none;
 }
-svg:hover{
-	stroke: white;
-}
-#controls * {
+
+#controls img {
 	height: 50px;
 	width: 100px;
 	border: none;
 	outline: none;
 	cursor: pointer;
 }
-#controls button:hover {
-	/* display: block; */
-	color:yellow;
-}
 
 #switchcamera {
 	grid-column: 1/1;
 	grid-row: 2/2;
+	margin-bottom: calc(var(--margin) * 2);
 	margin-left: var(--margin);
 }
 #screen {
 	grid-column: 1/1;
 	grid-row: 3/3;
+	margin-bottom: calc(var(--margin) * 2);
 	margin-left: var(--margin);
 }
 #audio {
