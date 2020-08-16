@@ -11,33 +11,33 @@ class Signaling {
     room = "bua";
     constructor() {
 
-        this.wss.emit('create or join', this.room);
+        this.wss.emit('INITI_ROOM_OR_JOIN_ROOM', this.room);
 
-        this.wss.on('full', (room) => {
-            // console.log('Room ' + room + ' is full');
+        this.wss.on('ROOM_IS_FULL', (room) => {
+            console.log('Room ' + room + ' is full');
+            // display an alert on UI/UX that room requested is currently 
+            // occupied
         });
 
-        this.wss.on('empty', (room) => {
-            isInitiator = true;
-            // console.log('Room ' + room + ' is empty');
+        this.wss.on('ROOM_IS_EMPTY', (room) => {
+        
+            console.log('Room ' + room + ' is empty');
         });
 
-        this.wss.on('join', (room) => {
-            // console.log('Making request to join room ' + room);
+        this.wss.on('ENTER_ROOM', (room) => {
+            console.log('Making request to join room ', room);
             // console.log('You are the initiator!');
         });
 
-        this.wss.on('log', (array) => {
-            // console.log.apply(console, array);
-        });
+        
     }
     /**
      * 
      * @param {Function} listener 
-     * @description sets listener to on message Event
+     * @description sets listener to on wrtcdataexchange Event
      */
     onmessage(listener) {
-        this.wss.on('message', listener);
+        this.wss.on('SDP_DATA', listener);
     }
     /**
      * 
@@ -45,7 +45,7 @@ class Signaling {
      * @description sends data to socket server.
      */
     send(dataObject) {
-        this.wss.emit('message', dataObject)
+        this.wss.emit('WRTC_SDP_EXCHANGE', dataObject)
     }
 }
 

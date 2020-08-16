@@ -2,8 +2,9 @@
 	"name": "app",
 	"version": "1.0.0",
 	"description": "video chat application with WRTC",
-	"main": "main.js",
+	"main": "websocketServer.js",
 	"scripts": {
+		"server": "nodemon websocketServer",
 		"dev": "webpack-dev-server --config webpack.dev.config.js ---hot",
 		"build": "webpack --config webpack.build.config.js"
 	},
