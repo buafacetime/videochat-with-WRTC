@@ -118,7 +118,7 @@ svg {
 	cursor: pointer;
 }
 
-#switchcamera {
+#startCall {
 	grid-column: 1/1;
 	grid-row: 2/2;
 	margin-bottom: calc(var(--margin) * 2);

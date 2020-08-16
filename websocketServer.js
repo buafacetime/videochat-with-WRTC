@@ -1,4 +1,7 @@
-const wss = require("socket.io")(8080);
+const port = process.env.PORT || 3000,
+    wss = require("socket.io")(port);
+
+wss.origins(['http://localhost:8080']);
 
 wss.on('connect', socket => {
 
@@ -34,4 +37,4 @@ wss.on('connect', socket => {
     });
 });
 
-console.log('websocket server listening at ws://localhost:8080')
+console.log(`websocket server listening at ws://localhost:${port}`);

@@ -7,10 +7,10 @@ import io from 'socket.io-client';
  * use wrtc in the browser.
  */
 class Signaling {
-    wss = io('http://localhost:8080/');
-    room = "bua";
-    constructor() {
-
+    wss = io('http://localhost:3000/');
+    
+    constructor(room) {
+        this.room = room;
         this.wss.emit('INITI_ROOM_OR_JOIN_ROOM', this.room);
 
         this.wss.on('ROOM_IS_FULL', (room) => {

@@ -1,5 +1,4 @@
-const { stunServers } = require("../../../../../../../learning-webrtc/webrtc_app/facetime/src/components/utils/publicServers");
-
+"use strict";
 /**
  * @returns an Array of public stun servers, used to
  * get peers ip address.

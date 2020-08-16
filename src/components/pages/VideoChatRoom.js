@@ -1,25 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
-import camera from "../../svg/switch_cameras.svg"
-import screenOff from "../../svg/screen_off.svg"
-import screenOn from "../../svg/screen_on.svg"
-import audioOn from "../../svg/audio_on.svg"
-import audioOff from "../../svg/mute_audio.svg"
-import endCall from "../../svg/call_ended.svg"
-import callEnded from "../../svg/end_call.svg"
+import phone from "../../svg/phone.svg";
+import screenOff from "../../svg/screen_off.svg";
+import screenOn from "../../svg/screen_on.svg";
+import audioOn from "../../svg/audio_on.svg";
+import audioOff from "../../svg/mute_audio.svg";
+import endCall from "../../svg/call_ended.svg";
+import callEnded from "../../svg/end_call.svg";
+import WRTCSETUP from "../RTC/setUp.js";
+
 
 const VideoChatRoom = () => {
     const localVideoRef = useRef(null),
         remoteVideoRef = useRef(null);
 
     const [state, setState] = useState({
-        switchcamera: {
-            ref: useRef(null), boolean: true, off: camera, on: camera, task(bool) {
+        RTCSetup: new WRTCSETUP(
+            localVideoRef,
+            remoteVideoRef,
+            "lenna"),
+        startCall: {
+            ref: useRef(null), boolean: true, off: phone, on: phone, task(bool) {
                 switch (bool) {
                     case true:
-                        console.log("camera switched")
-                        break
-                    case false:
-                        console.log("camera not switched")
+                        state.RTCSetup.startVideoChat();
+                        this.ref.current.removeEventListener('click',Click,false);
+                        console.log("video call started ")
                         break
                 }
             }
@@ -28,32 +33,22 @@ const VideoChatRoom = () => {
             ref: useRef(null), boolean: true, off: screenOff, on: screenOn, task(bool) {
                 switch (bool) {
                     case true:
-                        localVideoRef.current.srcObject = null;
-                        console.log("screen turned off")
-
+                        state.RTCSetup.turnOffLocalStream();
                         break
                     case false:
-                        this.userMedia();
-                        console.log("screen turned on")
-
+                        state.RTCSetup.turnOnLocalStream();
                         break
                 }
-            }, userMedia() {
-                navigator.mediaDevices.getUserMedia({ audio: true, video: { height: 150, width: 150 } })
-                    .then(stream => {
-                        localVideoRef.current.muted = true;
-                        localVideoRef.current.srcObject = stream;
-                    }).catch(err => console.error(err))
             }
         },
         audio: {
             ref: useRef(null), boolean: true, off: audioOff, on: audioOn, task(bool) {
                 switch (bool) {
                     case true:
-                        console.log("audio turned off")
+                        state.RTCSetup.muteAudio(bool);
                         break
                     case false:
-                        console.log("audio turned on")
+                        state.RTCSetup.muteAudio(bool);
                         break
                 }
             }
@@ -62,59 +57,65 @@ const VideoChatRoom = () => {
             ref: useRef(null), boolean: true, off: callEnded, on: endCall, task(bool) {
                 switch (bool) {
                     case true:
-                        console.log("call ended")
-                        break
-                    case false:
-                        console.log("call not ended")
+                        state.RTCSetup.endVideoChat();
+
+                        // redirect to home page.
                         break
                 }
             }
         }
     }), {
-        switchcamera,
+        startCall,
         screen,
         audio,
-        endcall
-    } = state,
+        endcall,
+        RTCSetup
+    } = state;
+
         /**
          * @param {object} object
          * @description Changes source of img clicked and
          *  invokes task method on object param passed in.
          */
-        InvokeProcedure = (object) => {
+        function InvokeProcedure (object) {
 
             object.boolean === true ?
                 (object.ref.current.src = object.off) :
                 (object.ref.current.src = object.on);
 
             object.task(object.boolean);
-
-            object.boolean === true ? (object.boolean = false) : (object.boolean = true);
-        },
+        }
         /**
          * @description a listener function for an onclick event.
          */
-        Click = e => {
+        function Click ( e ){
             let { name } = e.target;
-            if (name !== 'endcall') {
-                InvokeProcedure(state[name]);
+            if (name === 'endcall' || name === 'startCall') {
+                let object = state[name];
+                InvokeProcedure(object);
+                object.boolean = false;
+
             } else {
-                InvokeProcedure(state[name]);
+                let object = state[name];
+                InvokeProcedure(object);
+                object.boolean === true ? (object.boolean = false) : (object.boolean = true);
             }
         }
 
 
     useEffect(() => {
-        screen.userMedia()
-    }, [])
+        RTCSetup.turnOnLocalStream();
+    }, []);
+
+
 
     return (
         <div>
             <video id="localstream" ref={localVideoRef} autoPlay={true}></video>
             <video id="remotestream" ref={remoteVideoRef} autoPlay={true}></video>
             <section id="controls">
-                <img src={switchcamera['on']} name="switchcamera" alt="switchcamera" id="switchcamera"
-                    ref={switchcamera['ref']} onClick={Click} />
+                <img src={startCall['on']} name="startCall" alt="startCall" id="startCall"
+                    ref={startCall['ref']} onClick={Click} />
 
                 <img src={screen['on']} name="screen" alt="screen" id="screen"
                     ref={screen['ref']} onClick={Click} />
