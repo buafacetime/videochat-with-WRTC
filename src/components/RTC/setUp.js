@@ -12,6 +12,13 @@ class RTCSETUP extends Signaling {
     this.localVideoRef = localVideoRef;
     this.remoteVideoRef = remoteVideoRef;
 
+    this.setStopStream(() => {
+      this.peer.getSenders().forEach((sender) => {
+        this.peer.removeTrack(sender);
+      });
+      this.stream.getVideoTracks()[0].stop();
+      this.stream.getAudioTracks()[0].stop();
+    });
     this.setUpEvents();
   }
 
@@ -35,13 +42,6 @@ class RTCSETUP extends Signaling {
     let stream = await this.videoStream();
 
     for (let track of stream.getTracks()) this.peer.addTrack(track, stream);
-  }
-  stopStream() {
-    this.peer.getSenders().forEach((sender) => {
-      this.peer.removeTrack(this.peer.getSenders());
-    });
-    this.stream.getVideoTracks()[0].stop();
-    this.stream.getAudioTracks()[0].stop();
   }
 
   /**

@@ -35,6 +35,9 @@ class Signaling {
   send(dataObject) {
     this.wss.emit("WRTC_SDP_EXCHANGE", dataObject);
   }
+  setStopStream(fn) {
+    this.stopStream = fn;
+  }
 }
 
 export default Signaling;
