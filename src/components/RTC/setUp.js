@@ -54,21 +54,16 @@ class RTCSETUP extends Signaling {
             if(ref.srcObject !== null ){
                let tracks = ref.srcObject.getTracks();
                for (let track of tracks) {
+
                 track.stop();
+
                }
             }
         });
         this.turnOffRemoteStream();
         this.turnOffLocalStream();
-        this.peer.close();
-        this.peer = new RTCPeerConnection({
-            iceServers: [
-                ...stunServers(),
-                ...turnServers()
-            ]
-        });
-
         this.wss.emit('ENDVIDEOCHAT', this.room);
+        window.videoCallEnded();
     }
 
     /**
@@ -120,7 +115,7 @@ class RTCSETUP extends Signaling {
     turnOnLocalStream() {
         this.videoStream()
             .then(stream => this.addLocalStream(stream))
-            .catch(err => console.error(err))
+            .catch(err => console.error(err));
     }
     /**
      * @description gets remote video stream 

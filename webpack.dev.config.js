@@ -6,9 +6,14 @@ const webpack = require("webpack"),
 module.exports = {
     mode: "development",
     devtool: "source-map",
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        publicPath: '/'
+    },
     devServer: {
         contentBase: path.resolve(__dirname, 'build'),
-        port: 8080
+        port: 8080,
+        historyApiFallback: true
     },
     module: {
         rules: [

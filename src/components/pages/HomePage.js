@@ -1,4 +1,5 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment } from 'react';
+
 
 /**
  * @returns
@@ -6,8 +7,15 @@ import React, { useState, Fragment } from 'react'
  * then submit form before begin allocated with a 
  * facetime room.
  */
-const HomePage = () => {
+const HomePage = (props) => {
+  
     const [input, setInput] = useState('');
+    const Submit = e => {
+        e.preventDefault();
+    
+        props.history.push("/facetime");
+
+    }
 
     return (
 
@@ -20,12 +28,7 @@ const HomePage = () => {
                
                 <h4>Takes 3 seconds, No AppStore Needed!</h4>
             </section>
-            <form onSubmit={e => {
-                e.preventDefault();
-                alert("submitting form")
-                alert(input)
-
-            }}>
+            <form onSubmit={Submit}>
                 <input type="text"
                     placeholder=" Enter room id or press create to generate one"
                     value={input}

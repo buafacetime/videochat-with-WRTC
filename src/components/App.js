@@ -10,7 +10,7 @@ const App = () => {
         <Router>
             <Switch>
                 <Route exact path="/" component={HomePage}/>
-                <Route exact path="/facetime" />
+                <Route exact path="/facetime" component={ChatRoom}/>
             </Switch>
         </Router>
     )

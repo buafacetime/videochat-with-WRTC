@@ -8,7 +8,7 @@ import endCall from "../../svg/call_ended.svg";
 import callEnded from "../../svg/end_call.svg";
 import WRTCSETUP from "../RTC/setUp.js";
 
-const VideoChatRoom = () => {
+const VideoChatRoom = (props) => {
     const localVideoRef = useRef(null),
         remoteVideoRef = useRef(null),
         chatroomRef = useRef(null);
@@ -106,7 +106,7 @@ const VideoChatRoom = () => {
 
 
     useEffect(() => {
-        window.startVideoChat = function (txt) {
+        window.startVideoChat = txt => {
             console.log(txt);
             setState({
                 ...state,
@@ -115,6 +115,8 @@ const VideoChatRoom = () => {
 
             setTimeout(() => setState({ ...state, buaInSession: false }), 5000);
         }
+
+        window.videoCallEnded = () => props.history.push("/");
 
     }, []);
 
