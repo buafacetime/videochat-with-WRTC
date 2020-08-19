@@ -1,14 +1,18 @@
 import React from 'react';
-// import HomePage from "./pages/HomePage";
+import {BrowserRouter as Router, Switch, Route,} from 'react-router-dom'
+import HomePage from "./pages/HomePage";
 import ChatRoom from "./pages/VideoChatRoom";
 /**
  * @description main entry of my React app
  */
 const App = () => {
     return (
-        <div id="app">
-              <ChatRoom /> 
-        </div>
+        <Router>
+            <Switch>
+                <Route exact path="/" component={HomePage}/>
+                <Route exact path="/facetime" />
+            </Switch>
+        </Router>
     )
 }
 
