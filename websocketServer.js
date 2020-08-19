@@ -21,18 +21,11 @@ wss.on('connect', socket => {
 
         switch (numOfClientsInRoom) {
             case 0:
-                // socket.emit('ROOM_IS_EMPTY', roomName)
                 socket.join(roomName);
-                // wss.sockets.in(roomName).emit('ENTER_ROOM', roomName);
                 break
             case 1:
                 socket.join(roomName);
-                // socket.emit('joined', roomName);
-                // wss.sockets.in(roomName).emit('ENTER_ROOM', roomName);
                 socket.broadcast.emit("ROOM_IS_FULL");
-            // default:
-            //     socket.emit('ROOM_IS_FULL', roomName);
-            //     break
         }
 
     });

@@ -19,17 +19,15 @@ class Signaling {
             // occupied
         });
 
-        // this.wss.on('ROOM_IS_EMPTY', (room) => {
-        
-        //     console.log('Room ' + room + ' is empty');
-        // });
-
-        // this.wss.on('ENTER_ROOM', (room) => {
-        //     console.log('Making request to join room ', room);
-        //     // console.log('You are the initiator!');
-        // });
-
-        
+        this.wss.on('LEAVEROOM', () => {
+            if( window.leftRoom !== true) {
+                console.log("leave room");
+                window.leaveChatRoom(); 
+                window.videoCallEnded();
+            }
+            
+        });
+  
     }
     /**
      * 

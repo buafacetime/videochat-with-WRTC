@@ -106,8 +106,10 @@ const VideoChatRoom = (props) => {
 
 
     useEffect(() => {
+        RTCSetup.turnOnLocalStream();
+        
         window.startVideoChat = txt => {
-            console.log(txt);
+
             setState({
                 ...state,
                 buaInSession: true
@@ -124,47 +126,26 @@ const VideoChatRoom = (props) => {
 
     return (
         <div id="videoroom" ref={chatroomRef}>
-            {
-                buaInSession === true ?
-                    <Fragment>
-                        <span id="alert">Bua in session, Please press video call button</span>
-                        <video id="localstream" ref={localVideoRef} autoPlay={true} playsInline={true}></video>
-                        <video id="remotestream" ref={remoteVideoRef} autoPlay={true} playsInline={true}></video>
-                        <section id="controls">
-                            <img src={startCall['on']} name="startCall" alt="startCall" id="startCall" title="video call button"
-                                ref={startCall['ref']} onClick={Click} />
 
-                            <img src={screen['on']} name="screen" alt="screen" id="screen"
-                                ref={screen['ref']} onClick={Click} />
+            {buaInSession === true ? (<span id="alert">Bua in session, Please press video call button</span>) : (<> </>)}
+            
+            <video id="localstream" ref={localVideoRef} ></video>
 
-                            <img src={audio['on']} name="audio" alt="audio" id="audio"
-                                ref={audio['ref']} onClick={Click} />
+            <video id="remotestream" ref={remoteVideoRef} ></video>
 
-                            <img src={endcall['on']} name="endcall" alt="endcall" id="endcall"
-                                ref={endcall['ref']} onClick={Click} />
-                        </section>
-                        {RTCSetup.turnOnLocalStream()}
-                    </Fragment> :
-                    <Fragment>
-                        <video id="localstream" ref={localVideoRef} autoPlay={true}></video>
-                        <video id="remotestream" ref={remoteVideoRef} autoPlay={true}></video>
-                        <section id="controls">
-                            <img src={startCall['on']} name="startCall" alt="startCall" id="startCall"
-                                ref={startCall['ref']} onClick={Click} />
+            <section id="controls">
+                <img src={startCall['on']} name="startCall" alt="startCall" id="startCall" title="video call button"
+                    ref={startCall['ref']} onClick={Click} />
 
-                            <img src={screen['on']} name="screen" alt="screen" id="screen"
-                                ref={screen['ref']} onClick={Click} />
+                <img src={screen['on']} name="screen" alt="screen" id="screen"
+                    ref={screen['ref']} onClick={Click} />
 
-                            <img src={audio['on']} name="audio" alt="audio" id="audio"
-                                ref={audio['ref']} onClick={Click} />
+                <img src={audio['on']} name="audio" alt="audio" id="audio"
+                    ref={audio['ref']} onClick={Click} />
 
-                            <img src={endcall['on']} name="endcall" alt="endcall" id="endcall"
-                                ref={endcall['ref']} onClick={Click} />
-                        </section>
-                        {RTCSetup.turnOnLocalStream()}
-                    </Fragment>
-            }
-
+                <img src={endcall['on']} name="endcall" alt="endcall" id="endcall"
+                    ref={endcall['ref']} onClick={Click} />
+            </section>
         </div>
     )
 }

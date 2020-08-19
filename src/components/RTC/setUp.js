@@ -45,25 +45,31 @@ class RTCSETUP extends Signaling {
         for (let track of stream.getTracks()) this.peer.addTrack(track, stream);
 
     }
+    stopStream() {
+        [this.remoteVideoRef.current, this.localVideoRef.current].forEach(ref => {
+            if (ref.srcObject !== null) {
+                let tracks = ref.srcObject.getTracks();
+                for (let track of tracks) {
+
+                    track.stop();
+
+                }
+            }
+        });
+    }
 
     /**
      * @description ends local & remote stream, resets peer.
      */
     endVideoChat() {
-        [this.remoteVideoRef.current,this.localVideoRef.current ].forEach(ref => {
-            if(ref.srcObject !== null ){
-               let tracks = ref.srcObject.getTracks();
-               for (let track of tracks) {
-
-                track.stop();
-
-               }
-            }
-        });
+        this.stopStream();
         this.turnOffRemoteStream();
         this.turnOffLocalStream();
         this.wss.emit('ENDVIDEOCHAT', this.room);
         window.videoCallEnded();
+        this.wss.emit('LEAVEROOM');
+        window.leftRoom = true;
+
     }
 
     /**
@@ -101,7 +107,14 @@ class RTCSETUP extends Signaling {
             } catch (err) {
                 console.error(err.toString())
             }
-        });       
+        });
+
+        window.leaveChatRoom = () => {
+            this.stopStream();
+            this.turnOffRemoteStream();
+            this.turnOffLocalStream();
+            window.leftRoom = true;
+        }
     }
     turnOffRemoteStream() {
         this.remoteVideoRef.current.srcObject = null;
@@ -117,6 +130,7 @@ class RTCSETUP extends Signaling {
             .then(stream => this.addLocalStream(stream))
             .catch(err => console.error(err));
     }
+
     /**
      * @description gets remote video stream 
      * @returns stream object
@@ -130,6 +144,11 @@ class RTCSETUP extends Signaling {
             console.error(err.toString());
         }
     }
+    playVideo(video) {
+        video.addEventListener('loadedmetadata', e => {
+            video.play();
+        });
+    }
 
     /**
     * @param {object} stream
@@ -137,6 +156,7 @@ class RTCSETUP extends Signaling {
     */
     addLocalStream(stream) {
 
+        this.playVideo(this.localVideoRef.current);
         this.localVideoRef.current.muted = true;
         this.localVideoRef.current.srcObject = stream;
     }
@@ -146,6 +166,7 @@ class RTCSETUP extends Signaling {
     */
     addRemoteStream(event) {
         let { streams } = event;
+        this.playVideo(this.remoteVideoRef.current);
         try {
 
             if (this.remoteVideoRef.current.srcObject !== streams[0]) {
