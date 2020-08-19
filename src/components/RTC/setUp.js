@@ -53,7 +53,9 @@ class RTCSETUP extends Signaling {
         [this.remoteVideoRef.current,this.localVideoRef.current ].forEach(ref => {
             if(ref.srcObject !== null ){
                let tracks = ref.srcObject.getTracks();
-               for (let track of tracks) track.stop();
+               for (let track of tracks) {
+                track.stop();
+               }
             }
         });
         this.turnOffRemoteStream();
@@ -65,6 +67,8 @@ class RTCSETUP extends Signaling {
                 ...turnServers()
             ]
         });
+
+        this.wss.emit('ENDVIDEOCHAT', this.room);
     }
 
     /**
@@ -102,7 +106,7 @@ class RTCSETUP extends Signaling {
             } catch (err) {
                 console.error(err.toString())
             }
-        })
+        });       
     }
     turnOffRemoteStream() {
         this.remoteVideoRef.current.srcObject = null;
@@ -151,6 +155,7 @@ class RTCSETUP extends Signaling {
 
             if (this.remoteVideoRef.current.srcObject !== streams[0]) {
                 this.remoteVideoRef.current.srcObject = streams[0];
+                // disable call button for all users in room.
             }
 
         } catch (err) {

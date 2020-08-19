@@ -1,160 +1,181 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	color: whitesmoke;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: whitesmoke;
 }
 :root {
-	--ems: 1em;
-	--num: 2;
-	--margin: 10px;
-	--dark: #222;
+  --ems: 1em;
+  --num: 2;
+  --margin: 10px;
+  --dark: #222;
 }
 
 body {
-	background-color: var(--dark);
+  background-color: var(--dark);
+  height: 100%;
 }
 form {
-	margin: 30vh auto;
-	display: flex;
-	flex-flow: column nowrap;
-	width: 200px;
-	align-items: center;
+  margin: 30vh auto;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 200px;
+  align-items: center;
 }
-form > input[type='text'] {
-	border: none;
-	border-bottom: 2px solid white;
-	outline: none;
-	background: inherit;
-	height: 30px;
-	width: 330px;
-	font-size: var(--ems);
+form > input[type="text"] {
+  border: none;
+  border-bottom: 2px solid white;
+  outline: none;
+  background: inherit;
+  height: 30px;
+  width: 330px;
+  font-size: var(--ems);
 }
 #buttons {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 }
-#buttons input[type='button'],
-input[type='submit'] {
-	border: 1px solid white;
-	margin: 5px;
-	width: 100px;
-	height: 45px;
-	cursor: pointer;
-	font-size: var(--ems);
+#buttons input[type="button"],
+input[type="submit"] {
+  border: 1px solid white;
+  margin: 5px;
+  width: 100px;
+  height: 45px;
+  cursor: pointer;
+  font-size: var(--ems);
 }
 #buttons :nth-child(1) {
-	background-color: #1ddb5c;
+  background-color: #1ddb5c;
 }
 #buttons :nth-child(2) {
-	background-color: #ff9b04;
+  background-color: #ff9b04;
 }
 
 /* PWA Install banner */
 #installbanner {
-	height: 100px;
-	width: 180px;
-	top: 10px;
-	left: 5px;
-	position: absolute;
-	background-color: var(--dark);
-	padding: 10px;
-	border: 1px solid orange;
-	border-radius: 2px;
+  height: 100px;
+  width: 180px;
+  top: 10px;
+  left: 5px;
+  position: absolute;
+  background-color: var(--dark);
+  padding: 10px;
+  border: 1px solid orange;
+  border-radius: 2px;
 }
 /* PWA Install Button */
 #installBtn {
-	background-color: orange;
-	border: none;
-	outline: none;
-	height: 30px;
-	width: 60px;
-	cursor: pointer;
-	font-size: var(--ems);
-	margin-bottom: 10px;
-	border: 1px solid white;
+  background-color: orange;
+  border: none;
+  outline: none;
+  height: 30px;
+  width: 60px;
+  cursor: pointer;
+  font-size: var(--ems);
+  margin-bottom: 10px;
+  border: 1px solid white;
 }
-
+/* video room */
+#videoroom{
+	margin:auto;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+  width: 100%;
+}
 /* Video streams */
 video {
-	background-color: var(--dark);
+  background-color: var(--dark);
+  height: 100%;
+	max-height: 100%;
+	max-width: 100%;
+	object-fit: cover;   
+  width: 100%;
+  
 }
 #localstream {
-	z-index: 3;
-	position: absolute;
-	border: 1px solid white;
-	right: 5px;
-	bottom: 5px;
-	width: 150px;
-	height: 150px;
+  z-index: 3;
+  position: absolute;
+  border: 1px solid white;
+  right: 5px;
+  bottom: 5px;
+  width: 150px;
+  height: 150px;
 }
 #remotestream {
-	height: 100vh;
-	width: 100%;
+	/* display: block; */
+	
 }
 
 /* Video controls */
 #controls {
-	z-index: var(--num);
-	position: absolute;
-	bottom: 4px;
-	width: 100%;
-	height: 50%;
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	grid-template-rows: repeat(6, 1fr);
+  z-index: var(--num);
+  position: absolute;
+  bottom: 4px;
+  width: 100%;
+  height: 50%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(6, 1fr);
 }
 /* disables click events on all svgs */
 svg {
-	pointer-events: none;
+  pointer-events: none;
 }
 
 #controls img {
-	height: 50px;
-	width: 100px;
-	border: none;
-	outline: none;
-	cursor: pointer;
+  height: 50px;
+  width: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 #startCall {
-	grid-column: 1/1;
-	grid-row: 2/2;
-	margin-bottom: calc(var(--margin) * 2);
-	margin-left: var(--margin);
+  grid-column: 1/1;
+  grid-row: 2/2;
+  margin-bottom: calc(var(--margin) * 2);
+  margin-left: var(--margin);
 }
 #screen {
-	grid-column: 1/1;
-	grid-row: 3/3;
-	margin-bottom: calc(var(--margin) * 2);
-	margin-left: var(--margin);
+  grid-column: 1/1;
+  grid-row: 3/3;
+  margin-bottom: calc(var(--margin) * 2);
+  margin-left: var(--margin);
 }
 #audio {
-	grid-column: 1/1;
-	grid-row: 4/4;
-	margin-left: var(--margin);
+  grid-column: 1/1;
+  grid-row: 4/4;
+  margin-left: var(--margin);
 }
 #endcall {
-	grid-column: 6/6;
-	grid-row: 6/6;
+  grid-column: 6/6;
+  grid-row: 6/6;
 }
 
 /* Scrollbar styles */
 
 body {
-	scrollbar-width: thin;
-	scrollbar-color: var(--dark) transparent;
-	background-color: var(--dark);
+  scrollbar-width: thin;
+  scrollbar-color: var(--dark) transparent;
+  background-color: var(--dark);
 }
 body::-webkit-scrollbar {
-	width: 12px;
+  width: 12px;
 }
 body::-webkit-scrollbar-track {
-	background: transparent;
+  background: transparent;
 }
 body::-webkit-scrollbar-thumb {
-	background-color: var(--dark);
-	border-radius: 2px;
-	border: 3px solid transparent;
+  background-color: var(--dark);
+  border-radius: 2px;
+  border: 3px solid transparent;
+}
+/* video chat room alert */
+#alert {
+  z-index: 3;
+  background-color: red;
 }

@@ -5,7 +5,7 @@ wss.origins(['http://localhost:8080']);
 
 wss.on('connect', socket => {
 
-
+    socket.on('ENDVIDEOCHAT', roomName => socket.leave(roomName));
 
     socket.on('WRTC_SDP_EXCHANGE', (message) => {
 
@@ -21,17 +21,18 @@ wss.on('connect', socket => {
 
         switch (numOfClientsInRoom) {
             case 0:
-                socket.emit('ROOM_IS_EMPTY', roomName)
+                // socket.emit('ROOM_IS_EMPTY', roomName)
                 socket.join(roomName);
-                wss.sockets.in(roomName).emit('ENTER_ROOM', roomName);
+                // wss.sockets.in(roomName).emit('ENTER_ROOM', roomName);
                 break
             case 1:
                 socket.join(roomName);
                 // socket.emit('joined', roomName);
-                wss.sockets.in(roomName).emit('ENTER_ROOM', roomName);
-            default:
-                socket.emit('ROOM_IS_FULL', roomName);
-                break
+                // wss.sockets.in(roomName).emit('ENTER_ROOM', roomName);
+                socket.broadcast.emit("ROOM_IS_FULL");
+            // default:
+            //     socket.emit('ROOM_IS_FULL', roomName);
+            //     break
         }
 
     });

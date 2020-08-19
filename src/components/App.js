@@ -6,7 +6,7 @@ import ChatRoom from "./pages/VideoChatRoom";
  */
 const App = () => {
     return (
-        <div>
+        <div id="app">
               <ChatRoom /> 
         </div>
     )

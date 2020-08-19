@@ -13,21 +13,21 @@ class Signaling {
         this.room = room;
         this.wss.emit('INITI_ROOM_OR_JOIN_ROOM', this.room);
 
-        this.wss.on('ROOM_IS_FULL', (room) => {
-            console.log('Room ' + room + ' is full');
+        this.wss.on('ROOM_IS_FULL', () => {
+            window.startVideoChat ("chat room is full, start chat");
             // display an alert on UI/UX that room requested is currently 
             // occupied
         });
 
-        this.wss.on('ROOM_IS_EMPTY', (room) => {
+        // this.wss.on('ROOM_IS_EMPTY', (room) => {
         
-            console.log('Room ' + room + ' is empty');
-        });
+        //     console.log('Room ' + room + ' is empty');
+        // });
 
-        this.wss.on('ENTER_ROOM', (room) => {
-            console.log('Making request to join room ', room);
-            // console.log('You are the initiator!');
-        });
+        // this.wss.on('ENTER_ROOM', (room) => {
+        //     console.log('Making request to join room ', room);
+        //     // console.log('You are the initiator!');
+        // });
 
         
     }
