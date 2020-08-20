@@ -29,7 +29,7 @@ const VideoChatRoom = (props) => {
           switch (bool) {
             case true:
               state.RTCSetup.startVideoChat();
-              this.ref.current.removeEventListener("click", Click, false);
+            
               break;
           }
         },
@@ -124,6 +124,7 @@ const VideoChatRoom = (props) => {
       setTimeout(() => setState({ ...state, buaInSession: false }), 5000);
     };
     window.videoCallEnded = () => props.history.push("/");
+
   }, []);
 
   return (
@@ -139,42 +140,43 @@ const VideoChatRoom = (props) => {
       <video id="remotestream" ref={remoteVideoRef}></video>
 
       <section id="controls">
-        <img
-          src={startCall["on"]}
-          name="startCall"
-          alt="startCall"
-          id="startCall"
-          title="video call button"
-          ref={startCall["ref"]}
-          onClick={Click}
-        />
+        <button className="videoBtn" id="startCall" onClick={Click}>
+          <img
+            src={startCall["on"]}
+            name="startCall"
+            alt="startCall"
+            title="video call button"
+            ref={startCall["ref"]}
+          />
+        </button>
+        <button className="videoBtn" id="screen">
+          <img
+            src={screen["on"]}
+            name="screen"
+            alt="screen"
+            ref={screen["ref"]}
+            onClick={Click}
+          />
+        </button>
 
-        <img
-          src={screen["on"]}
-          name="screen"
-          alt="screen"
-          id="screen"
-          ref={screen["ref"]}
-          onClick={Click}
-        />
-
-        <img
-          src={audio["on"]}
-          name="audio"
-          alt="audio"
-          id="audio"
-          ref={audio["ref"]}
-          onClick={Click}
-        />
-
-        <img
-          src={endcall["on"]}
-          name="endcall"
-          alt="endcall"
-          id="endcall"
-          ref={endcall["ref"]}
-          onClick={Click}
-        />
+        <button className="videoBtn" id="audio">
+          <img
+            src={audio["on"]}
+            name="audio"
+            alt="audio"
+            ref={audio["ref"]}
+            onClick={Click}
+          />
+        </button>
+        <button className="videoBtn" id="endcall">
+          <img
+            src={endcall["on"]}
+            name="endcall"
+            alt="endcall"
+            ref={endcall["ref"]}
+            onClick={Click}
+          />
+        </button>
       </section>
     </div>
   );

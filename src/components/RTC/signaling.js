@@ -16,6 +16,7 @@ class Signaling {
       window.startVideoChat();
     });
     this.wss.on("CHATENDED", () => {
+      this.stopStream();
       window.videoCallEnded();
     });
   }
@@ -35,8 +36,8 @@ class Signaling {
   send(dataObject) {
     this.wss.emit("WRTC_SDP_EXCHANGE", dataObject);
   }
-  setStopStream(fn) {
-    this.stopStream = fn;
+  setStopStream(procedure) {
+    this.stopStream = procedure;
   }
 }
 

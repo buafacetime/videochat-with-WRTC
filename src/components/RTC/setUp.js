@@ -3,7 +3,7 @@ import Signaling from "./signaling.js";
 import { stunServers, turnServers } from "./servers/RTCServers.js";
 
 class RTCSETUP extends Signaling {
-  constructor(localVideoRef, remoteVideoRef, room = "bua") {
+  constructor(localVideoRef, remoteVideoRef, room) {
     super(room);
     this.peer = new RTCPeerConnection({
       iceServers: [...stunServers(), ...turnServers()],
@@ -13,11 +13,10 @@ class RTCSETUP extends Signaling {
     this.remoteVideoRef = remoteVideoRef;
 
     this.setStopStream(() => {
-      this.peer.getSenders().forEach((sender) => {
-        this.peer.removeTrack(sender);
-      });
+      this.peer.close();
       this.stream.getVideoTracks()[0].stop();
       this.stream.getAudioTracks()[0].stop();
+      setTimeout(() => location.reload(), 0);
     });
     this.setUpEvents();
   }
@@ -63,9 +62,12 @@ class RTCSETUP extends Signaling {
    */
   setUpEvents() {
     this.peer.addEventListener("icecandidate", (event) => {
+      
       try {
+      
         if (event.candidate) this.send({ candidate: event.candidate });
       } catch (err) {
+       
         console.log(`failed to add ICE Candidate: ${err.toString()}`);
       }
     });

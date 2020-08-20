@@ -109,6 +109,11 @@ video {
 
 	
 } */
+.videoBtn{
+  background-color: transparent;
+  border:none;
+  outline:none;
+}
 
 /* Video controls */
 #controls {
@@ -177,5 +182,13 @@ body::-webkit-scrollbar-thumb {
 /* video chat room alert */
 #alert {
   z-index: 3;
-  background-color: red;
+  background-color: rgba(96, 160, 0, 0.699);
+  border-radius: 2px;
+  height:35px;
+  width:260px;
+  text-align:center;
+  line-height: 2;
+  position: absolute;
+  top:20vh;
+  font-size:1em;
 }
