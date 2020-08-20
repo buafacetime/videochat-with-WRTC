@@ -26,7 +26,6 @@ const HomePage = (props) => {
     e.preventDefault();
     /*Select text field */
     copyInput.current.select();
-    console.dir(input.current);
     /*For mobile devices*/
     copyInput.current.setSelectionRange(0, 99999);
     /* Copy the text inside the text field */
