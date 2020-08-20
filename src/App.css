@@ -198,6 +198,13 @@ svg {
   }
 }
 
+@media all and (display-mode: standalone){
+  /* hides installbanner when PWA is installed */
+  #installbanner{
+    visibility: hidden;
+  }
+}
+
 /* Scrollbar styles */
 
 body {
