@@ -8,7 +8,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|tff)$/,
+        test: /\.ttf$/,
+        use: [
+          {
+            loader: "ttf-loader",
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpe?g)$/,
         use: "file-loader",
       },
       {

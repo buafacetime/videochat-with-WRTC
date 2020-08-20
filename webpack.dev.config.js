@@ -17,6 +17,7 @@ module.exports = {
   },
   module: {
     rules: [
+     
       {
         test: /\.(png|jpe?g|tff)$/,
         use: "file-loader",

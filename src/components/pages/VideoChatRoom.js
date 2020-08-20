@@ -29,7 +29,7 @@ const VideoChatRoom = (props) => {
           switch (bool) {
             case true:
               state.RTCSetup.startVideoChat();
-            
+
               break;
           }
         },
@@ -124,7 +124,6 @@ const VideoChatRoom = (props) => {
       setTimeout(() => setState({ ...state, buaInSession: false }), 5000);
     };
     window.videoCallEnded = () => props.history.push("/");
-
   }, []);
 
   return (

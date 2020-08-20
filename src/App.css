@@ -1,8 +1,15 @@
+
+/* @font-face{
+  font-family: customFont;
+  src: url('./utils/customFonts.ttf');
+  } */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   color: whitesmoke;
+  /* font-family: customFont; */
 }
 :root {
   --ems: 1em;
@@ -10,6 +17,21 @@
   --margin: 10px;
   --dark: #222;
 }
+footer {
+  position: fixed;
+  right:calc(50% - 50px);
+  bottom: 20px;
+  font-size: 0.75em;
+  width:100px;
+  text-align:center;
+  z-index:2;
+}
+@media only screen and (min-width:1000px){
+  footer{
+      right:calc(30% - 50px);
+    
+      }
+  }
 
 body {
   background-color: var(--dark);
@@ -26,10 +48,25 @@ form > input[type="text"] {
   border: none;
   border-bottom: 2px solid white;
   outline: none;
-  background: inherit;
+  background-color: inherit;
   height: 30px;
   width: 330px;
   font-size: var(--ems);
+}
+
+::selection{
+  background-color:#4ddb22da;
+}
+
+
+#copy,#share{
+  background-color: transparent;
+  border:none;
+  outline:none;
+  margin-bottom: 10px;
+  height: 20px;
+  width:30px;
+  cursor: pointer;
 }
 #buttons {
   display: flex;
