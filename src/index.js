@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import adapter from "webrtc-adapter";
 import App from "./components/App";
 import "./App.css";
+import registerSW from "./registerSW";
 
 // Since we are using HtmlWebpackPlugin
 //  WITHOUT a template, we should create
@@ -15,3 +16,5 @@ document.body.appendChild(root);
 
 // Now we can render our application into it
 render(<App />, document.getElementById("root"));
+
+registerSW();

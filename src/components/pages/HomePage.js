@@ -39,7 +39,8 @@ const HomePage = (props) => {
         <button
           id="installBtn"
           onClick={(e) => {
-            alert("PWA installed");
+            // show pwa install prompt
+            window.pwaInstallPrompt.prompt();
             e.target.blur();
           }}
         >
