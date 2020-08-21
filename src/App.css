@@ -17,6 +17,13 @@
   --margin: 10px;
   --dark: #222;
 }
+p, ol, li{
+  text-align: left;
+  width:250px;
+}
+main{
+  height: 100vh;
+}
 footer {
   position: fixed;
   right:calc(50% - 50px);
@@ -202,6 +209,9 @@ svg {
   /* hides installbanner when PWA is installed */
   #installbanner{
     visibility: hidden;
+  }
+  form{
+    margin:10vh auto;
   }
 }
 

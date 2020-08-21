@@ -33,7 +33,7 @@ const HomePage = (props) => {
   };
 
   return (
-    <Fragment>
+    <main>
       {/* remove banner section when pwa is installed */}
       <section id="installbanner">
         <button
@@ -76,10 +76,31 @@ const HomePage = (props) => {
 
           <input type="submit" value="enter" onClick={(e) => e.target.blur()} />
         </section>
+        <br/>
+        <p>
+          &#128400;, welcome please follow instructions below on how to setup a
+          video call through the browser.
+        </p>
+        <br/>
+        <ol>
+          <li>generate room id or enter one</li>
+          <br/>
+          <li>copy and share room id via any mediam you wish</li>
+          <br/>
+          <li>
+            enter room of genrated room id and wait for other peer to enter
+          </li>
+          <br/>
+          <li>once other peer has joined, caller will be notified</li>
+          <br/>
+          <li>caller may start video call</li>
+          <br/>
+          <li>facetime</li>
+        </ol>
       </form>
 
       <footer>&copy; 2020 KT Motshoana</footer>
-    </Fragment>
+    </main>
   );
 };
 
