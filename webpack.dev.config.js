@@ -66,7 +66,7 @@ module.exports = {
       meta: {
         author: "K.T Motshoana",
         applicationName: "Bua Facetime",
-        description: "webapp facetime with built in voice effects",
+        description: "video chat application with WRTC",
         robots: "index,follow",
         googlebot: "index,follow",
         keywords:
