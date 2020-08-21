@@ -46,7 +46,7 @@ const HomePage = (props) => {
         >
           Install
         </button>
-
+        <i style={{marginLeft: '5px'}}> Beta</i>
         <h4>Takes 3 seconds, No AppStore Needed!</h4>
       </section>
       {/* remove above banner section when pwa is installed */}
