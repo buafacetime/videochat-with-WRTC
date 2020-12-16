@@ -1,0 +1,14 @@
+{
+	"name": "wrtc-server",
+	"version": "1.0.0",
+	"description": "a wrtc onnection server",
+	"main": "wsServer.js",
+	"scripts": {
+		"start": "node wsServer"
+	},
+	"author": "K.T Motshoana",
+	"license": "ISC",
+	"dependencies": {
+		"websocket": "^1.0.33"
+	}
+}
