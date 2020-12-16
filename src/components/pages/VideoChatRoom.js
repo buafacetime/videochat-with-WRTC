@@ -9,9 +9,10 @@ import callEnded from "../../svg/end_call.svg";
 import WRTCSETUP from "../RTC/setUp.js";
 
 const VideoChatRoom = (props) => {
+
   const localVideoRef = useRef(null),
-    remoteVideoRef = useRef(null),
-    chatroomRef = useRef(null);
+  remoteVideoRef = useRef(null),
+  chatroomRef = useRef(null);
 
   const [state, setState] = useState({
       buaInSession: false,
@@ -79,8 +80,9 @@ const VideoChatRoom = (props) => {
           }
         },
       },
-    }),
-    { buaInSession, startCall, screen, audio, endcall, RTCSetup } = state;
+    });
+
+   
 
   /**
    * @param {object} object
@@ -113,9 +115,9 @@ const VideoChatRoom = (props) => {
   }
 
   useEffect(() => {
-    RTCSetup.turnOnLocalStream();
+    state.RTCSetup.turnOnLocalStream();
 
-    window.startVideoChat = () => {
+    window.initVideoCall = () => {
       setState({
         ...state,
         buaInSession: true,
@@ -126,9 +128,11 @@ const VideoChatRoom = (props) => {
     window.videoCallEnded = () => props.history.push("/");
   }, []);
 
+
+
   return (
     <div id="videoroom" ref={chatroomRef}>
-      {buaInSession === true ? (
+      {state.buaInSession === true ? (
         <span id="alert">You're Friend has joined, start call</span>
       ) : (
         <> </>
@@ -141,38 +145,38 @@ const VideoChatRoom = (props) => {
       <section id="controls">
         <button className="videoBtn" id="startCall" onClick={Click}>
           <img
-            src={startCall["on"]}
+            src={state.startCall["on"]}
             name="startCall"
             alt="startCall"
             title="video call button"
-            ref={startCall["ref"]}
+            ref={state.startCall["ref"]}
           />
         </button>
         <button className="videoBtn" id="screen">
           <img
-            src={screen["on"]}
+            src={state.screen["on"]}
             name="screen"
             alt="screen"
-            ref={screen["ref"]}
+            ref={state.screen["ref"]}
             onClick={Click}
           />
         </button>
 
         <button className="videoBtn" id="audio">
           <img
-            src={audio["on"]}
+            src={state.audio["on"]}
             name="audio"
             alt="audio"
-            ref={audio["ref"]}
+            ref={state.audio["ref"]}
             onClick={Click}
           />
         </button>
         <button className="videoBtn" id="endcall">
           <img
-            src={endcall["on"]}
+            src={state.endcall["on"]}
             name="endcall"
             alt="endcall"
-            ref={endcall["ref"]}
+            ref={state.endcall["ref"]}
             onClick={Click}
           />
         </button>

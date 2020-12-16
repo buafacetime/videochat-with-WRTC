@@ -1,20 +1,25 @@
-import React from "react";
-import { render } from "react-dom";
-import adapter from "webrtc-adapter";
-import App from "./components/App";
-import "./App.css";
-import registerSW from "./registerSW";
+import React from 'react';
+import { render } from 'react-dom';
+import adapter from 'webrtc-adapter';
+import App from './components/App';
+import './App.css';
+import registerSW from './registerSW';
 
 // Since we are using HtmlWebpackPlugin
 //  WITHOUT a template, we should create
 // our own root node in the body element before
 // rendering into it
-const root = document.createElement("div");
+const root = document.createElement('div');
 
-root.id = "root";
+root.id = 'root';
 document.body.appendChild(root);
 
 // Now we can render our application into it
-render(<App />, document.getElementById("root"));
+render(
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>,
+	document.getElementById('root')
+);
 
 registerSW();
